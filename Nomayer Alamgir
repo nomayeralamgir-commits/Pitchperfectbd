@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JERSEYLAB — Premium Kits</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--white:#f5f3ef;--gold:#d4a843;--gray:#1e1e1e}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+#cursor{width:14px;height:14px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform .15s ease}
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 2.5rem;border-bottom:1px solid #ffffff10;backdrop-filter:blur(12px);background:#0a0a0a99}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.1em;color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--white);text-decoration:none;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;opacity:.7;transition:opacity .2s}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-right{display:flex;gap:.8rem;align-items:center}
+.cart-btn{position:relative;background:transparent;border:1px solid #ffffff20;color:var(--white);width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s;font-size:1.1rem}
+.cart-btn:hover{border-color:var(--gold);color:var(--gold)}
+.cart-count{position:absolute;top:-6px;right:-6px;background:var(--gold);color:var(--black);font-size:.6rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:opacity .2s,transform .2s}
+.cart-count.visible{opacity:1;transform:scale(1)}
+.nav-cta{background:var(--gold);color:var(--black);border:none;padding:.55rem 1.4rem;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:none;transition:background .2s,transform .2s}
+.nav-cta:hover{background:#e8b94e;transform:translateY(-1px)}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:80px;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:6rem 3rem 6rem 4rem}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,8rem);line-height:.92;margin-bottom:1.8rem;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero-title span{color:var(--gold)}
+.hero-desc{max-width:400px;line-height:1.7;font-size:.95rem;opacity:0;animation:fadeUp .8s .6s forwards;color:#aaa;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;opacity:0;animation:fadeUp .8s .8s forwards}
+.btn-primary{background:var(--gold);color:var(--black);padding:.9rem 2.2rem;font-size:.85rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:none;transition:transform .2s,background .2s}
+.btn-primary:hover{transform:translateY(-2px);background:#e8b94e}
+.btn-outline{background:transparent;color:var(--white);padding:.9rem 2.2rem;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid #ffffff30;cursor:none;transition:border-color .2s,color .2s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-right{position:relative;background:var(--gray);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.jersey-mockup{width:320px;height:380px;animation:float 4s ease-in-out infinite}
+.jersey-svg{width:100%;height:100%}
+.hero-right::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,#d4a84330 0%,transparent 70%);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
+.badge{position:absolute;bottom:2.5rem;right:2.5rem;width:90px;height:90px;border:1px solid var(--gold);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.1em;color:var(--gold);text-align:center;animation:spin 20s linear infinite}
+.marquee-wrap{border-top:1px solid #ffffff10;border-bottom:1px solid #ffffff10;overflow:hidden;padding:.9rem 0;background:var(--gray)}
+.marquee{display:flex;gap:3rem;animation:marquee 20s linear infinite;white-space:nowrap}
+.marquee span{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.15em;color:#ffffff30;flex-shrink:0}
+.marquee span.accent{color:var(--gold)}
+.products{padding:8rem 4rem}
+.section-label{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);margin-bottom:4rem}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+.product-card{background:var(--gray);overflow:hidden;position:relative;cursor:none;transition:transform .3s}
+.product-card:hover{transform:translateY(-6px)}
+.product-card:hover .card-overlay{opacity:1}
+.card-img{height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-overlay{position:absolute;inset:0;background:#d4a84320;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
+.card-overlay button{background:var(--gold);color:var(--black);border:none;padding:.75rem 1.8rem;font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:none}
+.card-info{padding:1.2rem 1.4rem}
+.card-team{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.card-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.8rem}
+.card-price{font-size:1rem;font-weight:500}
+.card-badge{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .7rem;border:1px solid #ffffff20;color:#aaa}
+.j1{fill:#1a3a5c}.j2{fill:#8b1a1a}.j3{fill:#1a5c2a}.j4{fill:#1a1a5c}
+.features{display:grid;grid-template-columns:1fr 1fr;min-height:60vh}
+.features-left{background:var(--gold);padding:6rem 4rem;color:var(--black);display:flex;flex-direction:column;justify-content:center}
+.features-left .section-label{color:var(--black);opacity:.6}
+.features-left .section-title{color:var(--black)}
+.feat-list{list-style:none;margin-top:2rem;display:flex;flex-direction:column;gap:1.2rem}
+.feat-list li{display:flex;align-items:flex-start;gap:.8rem;font-size:.92rem;line-height:1.5}
+.feat-list li::before{content:'→';font-size:1rem;flex-shrink:0;margin-top:.05rem}
+.features-right{background:var(--gray);padding:6rem 4rem;display:flex;flex-direction:column;justify-content:center;gap:2.5rem}
+.stat{border-left:2px solid var(--gold);padding-left:1.5rem}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:var(--gold)}
+.stat-label{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:#aaa}
+.custom{padding:8rem 4rem;text-align:center;position:relative;overflow:hidden}
+.custom::before{content:'CUSTOM';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:20vw;color:#ffffff05;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none}
+.custom-inner{position:relative;z-index:1;max-width:600px;margin:0 auto}
+.custom-inner .section-title{margin-bottom:1.2rem}
+.custom-inner p{color:#aaa;line-height:1.7;margin-bottom:2.5rem}
+.cart-overlay{position:fixed;inset:0;background:#00000080;z-index:500;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:0;width:420px;max-width:100vw;height:100vh;background:#111;z-index:600;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);border-left:1px solid #ffffff10}
+.cart-drawer.open{transform:translateX(0)}
+.cart-header{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 1.8rem;border-bottom:1px solid #ffffff10}
+.cart-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.1em}
+.cart-close{background:transparent;border:none;color:var(--white);font-size:1.4rem;cursor:none;opacity:.6;transition:opacity .2s;line-height:1}
+.cart-close:hover{opacity:1}
+.cart-items{flex:1;overflow-y:auto;padding:1rem 1.8rem}
+.cart-items::-webkit-scrollbar{width:4px}
+.cart-items::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#555;gap:1rem;text-align:center}
+.cart-empty-icon{font-size:3rem;opacity:.3}
+.cart-empty p{font-size:.85rem}
+.cart-item{display:flex;gap:1rem;padding:1.2rem 0;border-bottom:1px solid #ffffff08;animation:slideIn .25s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.cart-item-img{width:70px;height:80px;background:var(--gray);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cart-item-info{flex:1}
+.cart-item-team{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
+.cart-item-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;margin-bottom:.5rem}
+.cart-item-price{font-size:.85rem;color:#aaa}
+.cart-item-controls{display:flex;align-items:center;gap:.5rem;margin-top:.6rem}
+.qty-btn{background:var(--gray);border:none;color:var(--white);width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:none;transition:background .2s}
+.qty-btn:hover{background:var(--gold);color:var(--black)}
+.qty-num{font-size:.85rem;min-width:20px;text-align:center}
+.cart-item-remove{background:transparent;border:none;color:#444;font-size:.75rem;cursor:none;letter-spacing:.1em;text-transform:uppercase;margin-left:auto;transition:color .2s;align-self:flex-start;padding-top:.2rem}
+.cart-item-remove:hover{color:#c0392b}
+.cart-footer{padding:1.5rem 1.8rem;border-top:1px solid #ffffff10;background:#0d0d0d}
+.cart-row{display:flex;justify-content:space-between;margin-bottom:.6rem;font-size:.85rem;color:#aaa}
+.cart-total-row{display:flex;justify-content:space-between;margin-bottom:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em}
+.cart-total-row span:last-child{color:var(--gold)}
+.checkout-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:1rem;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:none;transition:background .2s,transform .2s}
+.checkout-btn:hover:not(:disabled){background:#e8b94e;transform:translateY(-1px)}
+.checkout-btn:disabled{background:#333;color:#666}
+.cart-note{text-align:center;font-size:.7rem;color:#444;margin-top:.8rem;letter-spacing:.05em}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray);border:1px solid var(--gold);color:var(--white);padding:.8rem 1.6rem;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;z-index:700;transition:transform .3s ease;white-space:nowrap;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+footer{background:var(--gray);padding:3rem 4rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ffffff10}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);letter-spacing:.1em}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#aaa;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:.75rem;color:#444}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-right{min-height:50vw}.features{grid-template-columns:1fr}footer{flex-direction:column;gap:1.5rem;text-align:center}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<nav>
+  <div class="logo">JERSEYLAB</div>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#features">Why Us</a></li>
+    <li><a href="#custom">Custom</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></button>
+    <button class="nav-cta">Order Now</button>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Season 2026 Collection</p>
+    <h1 class="hero-title">Play in <span>Style.</span><br>Win in<br>Comfort.</h1>
+    <p class="hero-desc">Premium jerseys engineered for performance and crafted for identity. Every stitch, a statement.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView()">Shop Collection</button>
+      <button class="btn-outline" onclick="document.getElementById('custom').scrollIntoView()">Custom Kits</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="jersey-mockup">
+      <svg class="jersey-svg" viewBox="0 0 320 380" fill="none">
+        <path d="M80 80 L30 120 L50 200 L80 190 L80 330 L240 330 L240 190 L270 200 L290 120 L240 80 L210 60 C210 60 190 100 160 100 C130 100 110 60 110 60 Z" fill="#1a3a5c"/>
+        <path d="M30 120 L50 200 L80 190 L80 140 Z" fill="#d4a843" opacity=".3"/>
+        <path d="M290 120 L270 200 L240 190 L240 140 Z" fill="#d4a843" opacity=".3"/>
+        <path d="M110 60 C110 60 130 100 160 100 C190 100 210 60 210 60 C205 55 195 50 160 50 C125 50 115 55 110 60 Z" fill="#d4a843"/>
+        <rect x="150" y="100" width="20" height="230" fill="#d4a843" opacity=".15"/>
+        <text x="160" y="230" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="80" fill="white" opacity=".9">7</text>
+        <circle cx="110" cy="150" r="18" fill="none" stroke="#d4a843" stroke-width="1.5" opacity=".6"/>
+      </svg>
+    </div>
+    <div class="badge">NEW<br>2026<br>KIT</div>
+  </div>
+</section>
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span>FREE SHIPPING</span><span class="accent">★</span><span>CUSTOM PRINTING</span><span class="accent">★</span><span>PREMIUM FABRIC</span><span class="accent">★</span><span>TEAM ORDERS</span><span class="accent">★</span><span>FAST DELIVERY</span><span class="accent">★</span>
+    <span>FREE SHIPPING</span><span class="accent">★</span><span>CUSTOM PRINTING</span><span class="accent">★</span><span>PREMIUM FABRIC</span><span class="accent">★</span><span>TEAM ORDERS</span><span class="accent">★</span><span>FAST DELIVERY</span><span class="accent">★</span>
+  </div>
+</div>
+<section class="products" id="products">
+  <p class="section-label">The Collection</p>
+  <h2 class="section-title">Featured Kits</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="card-img" style="background:#12253d">
+        <svg width="160" height="200" viewBox="0 0 320 380" fill="none"><path d="M80 80 L30 120 L50 200 L80 190 L80 330 L240 330 L240 190 L270 200 L290 120 L240 80 L210 60 C210 60 190 100 160 100 C130 100 110 60 110 60 Z" class="j1"/><path d="M110 60 C110 60 130 100 160 100 C190 100 210 60 210 60 C205 55 195 50 160 50 C125 50 115 55 110 60 Z" fill="#d4a843"/><text x="160" y="230" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="80" fill="white" opacity=".9">10</text></svg>
+        <div class="card-overlay"><button onclick="addToCart('ocean-blue','Ocean Blue Classic','Home Kit',79.99,'#12253d','#1a3a5c','10')">Add to Cart</button></div>
+      </div>
+      <div class="card-info"><p class="card-team">Home Kit</p><p class="card-name">Ocean Blue Classic</p><div class="card-footer"><span class="card-price">$79.99</span><span class="card-badge">Bestseller</span></div></div>
+    </div>
+    <div class="product-card">
+      <div class="card-img" style="background:#2a0c0c">
+        <svg width="160" height="200" viewBox="0 0 320 380" fill="none"><path d="M80 80 L30 120 L50 200 L80 190 L80 330 L240 330 L240 190 L270 200 L290 120 L240 80 L210 60 C210 60 190 100 160 100 C130 100 110 60 110 60 Z" class="j2"/><path d="M110 60 C110 60 130 100 160 100 C190 100 210 60 210 60 C205 55 195 50 160 50 C125 50 115 55 110 60 Z" fill="white"/><text x="160" y="230" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="80" fill="white" opacity=".9">9</text></svg>
+        <div class="card-overlay"><button onclick="addToCart('crimson-strike','Crimson Strike','Away Kit',84.99,'#2a0c0c','#8b1a1a','9')">Add to Cart</button></div>
+      </div>
+      <div class="card-info"><p class="card-team">Away Kit</p><p class="card-name">Crimson Strike</p><div class="card-footer"><span class="card-price">$84.99</span><span class="card-badge">New</span></div></div>
+    </div>
+    <div class="product-card">
+      <div class="card-img" style="background:#0c2a14">
+        <svg width="160" height="200" viewBox="0 0 320 380" fill="none"><path d="M80 80 L30 120 L50 200 L80 190 L80 330 L240 330 L240 190 L270 200 L290 120 L240 80 L210 60 C210 60 190 100 160 100 C130 100 110 60 110 60 Z" class="j3"/><path d="M110 60 C110 60 130 100 160 100 C190 100 210 60 210 60 C205 55 195 50 160 50 C125 50 115 55 110 60 Z" fill="#d4a843"/><text x="160" y="230" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="80" fill="white" opacity=".9">1</text></svg>
+        <div class="card-overlay"><button onclick="addToCart('forest-keeper','Forest Keeper','Third Kit',74.99,'#0c2a14','#1a5c2a','1')">Add to Cart</button></div>
+      </div>
+      <div class="card-info"><p class="card-team">Third Kit</p><p class="card-name">Forest Keeper</p><div class="card-footer"><span class="card-price">$74.99</span><span class="card-badge">Limited</span></div></div>
+    </div>
+    <div class="product-card">
+      <div class="card-img" style="background:#0c0c2a">
+        <svg width="160" height="200" viewBox="0 0 320 380" fill="none"><path d="M80 80 L30 120 L50 200 L80 190 L80 330 L240 330 L240 190 L270 200 L290 120 L240 80 L210 60 C210 60 190 100 160 100 C130 100 110 60 110 60 Z" class="j4"/><path d="M30 120 L50 200 L80 190 L80 140 Z" fill="#d4a843" opacity=".5"/><path d="M290 120 L270 200 L240 190 L240 140 Z" fill="#d4a843" opacity=".5"/><path d="M110 60 C110 60 130 100 160 100 C190 100 210 60 210 60 C205 55 195 50 160 50 C125 50 115 55 110 60 Z" fill="#d4a843"/><text x="160" y="230" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="80" fill="white" opacity=".9">11</text></svg>
+        <div class="card-overlay"><button onclick="addToCart('midnight-thunder','Midnight Thunder','Special Edition',99.99,'#0c0c2a','#1a1a5c','11')">Add to Cart</button></div>
+      </div>
+      <div class="card-info"><p class="card-team">Special Edition</p><p class="card-name">Midnight Thunder</p><div class="card-footer"><span class="card-price">$99.99</span><span class="card-badge">Exclusive</span></div></div>
+    </div>
+  </div>
+</section>
+<section class="features" id="features">
+  <div class="features-left">
+    <p class="section-label">Why JerseyLab</p>
+    <h2 class="section-title">Built Different.</h2>
+    <ul class="feat-list">
+      <li>Moisture-wicking DryFlex fabric for peak performance</li>
+      <li>Sublimation printing — colors never fade or crack</li>
+      <li>Custom name and number printing in 48 hours</li>
+      <li>Bulk team orders with volume discounts</li>
+      <li>Eco-friendly recycled materials available</li>
+      <li>Sizes XS-5XL with tailored fit options</li>
+    </ul>
+  </div>
+  <div class="features-right">
+    <div class="stat"><div class="stat-num">15K+</div><div class="stat-label">Jerseys Delivered</div></div>
+    <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Teams Outfitted</div></div>
+    <div class="stat"><div class="stat-num">48H</div><div class="stat-label">Custom Print Turnaround</div></div>
+    <div class="stat"><div class="stat-num">4.9 Stars</div><div class="stat-label">Average Rating</div></div>
+  </div>
+</section>
+<section class="custom" id="custom">
+  <div class="custom-inner">
+    <p class="section-label">Design Your Own</p>
+    <h2 class="section-title">Your Team.<br>Your Identity.</h2>
+    <p>Upload your logo, pick your colors, choose your font. We'll handle the rest — printed and shipped to your door in under a week.</p>
+    <button class="btn-primary">Start Customizing</button>
+  </div>
+</section>
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2>Your Kit Bag</h2>
+    <button class="cart-close" onclick="closeCart()">X</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">🛒</div>
+      <p>Your cart is empty.<br>Add some kits to get started.</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+    <div class="cart-row"><span>Shipping</span><span>Free</span></div>
+    <div class="cart-total-row"><span>Total</span><span id="cartTotal">$0.00</span></div>
+    <button class="checkout-btn" id="checkoutBtn" disabled onclick="handleCheckout()">Proceed to Checkout</button>
+    <p class="cart-note">Secure checkout · Free returns · Fast delivery</p>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<footer id="contact">
+  <div class="footer-logo">JERSEYLAB</div>
+  <div class="footer-links">
+    <a href="#">Shop</a><a href="#">Custom</a><a href="#">FAQ</a><a href="#">Contact</a><a href="#">Wholesale</a>
+  </div>
+  <p class="footer-copy">2026 JerseyLab. All rights reserved.</p>
+</footer>
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = (e.clientX - 7) + 'px';
+  cursor.style.top = (e.clientY - 7) + 'px';
+});
+function bindCursor() {
+  document.querySelectorAll('button, a, .product-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.5)');
+    el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+  });
+}
+bindCursor();
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.product-card, .stat, .feat-list li').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(30px)';
+  el.style.transition='opacity .6s ease, transform .6s ease';
+  io.observe(el);
+});
+let cart = [];
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function addToCart(id, name, team, price, bg, jColor, num) {
+  const ex = cart.find(i => i.id === id);
+  if (ex) { ex.qty++; } else { cart.push({id,name,team,price,bg,jColor,num,qty:1}); }
+  renderCart();
+  showToast(name + ' added to cart');
+  openCart();
+}
+function removeItem(id) { cart = cart.filter(i => i.id !== id); renderCart(); }
+function changeQty(id, d) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += d;
+  if (item.qty <= 0) { removeItem(id); return; }
+  renderCart();
+}
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const empty = document.getElementById('cartEmpty');
+  const countEl = document.getElementById('cartCount');
+  const subtotalEl = document.getElementById('cartSubtotal');
+  const totalEl = document.getElementById('cartTotal');
+  const btn = document.getElementById('checkoutBtn');
+  const totalItems = cart.reduce((s,i) => s + i.qty, 0);
+  const subtotal = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  countEl.textContent = totalItems;
+  countEl.classList.toggle('visible', totalItems > 0);
+  subtotalEl.textContent = '$' + subtotal.toFixed(2);
+  totalEl.textContent = '$' + subtotal.toFixed(2);
+  btn.disabled = cart.length === 0;
+  Array.from(container.children).forEach(c => { if (c.id !== 'cartEmpty') c.remove(); });
+  if (cart.length === 0) { empty.style.display = 'flex'; return; }
+  empty.style.display = 'none';
+  cart.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'cart-item';
+    el.innerHTML = '<div class="cart-item-img" style="background:' + item.bg + '"><svg width="50" height="60" viewBox="0 0 320 380" fill="none"><path d="M80 80 L30 120 L50 200 L80 190 L80 330 L240 330 L240 190 L270 200 L290 120 L240 80 L210 60 C210 60 190 100 160 100 C130 100 110 60 110 60 Z" fill="' + item.jColor + '"/><path d="M110 60 C110 60 130 100 160 100 C190 100 210 60 210 60 C205 55 195 50 160 50 C125 50 115 55 110 60 Z" fill="#d4a843"/><text x="160" y="230" text-anchor="middle" font-family="Bebas Neue,sans-serif" font-size="80" fill="white" opacity=".9">' + item.num + '</text></svg></div><div class="cart-item-info"><p class="cart-item-team">' + item.team + '</p><p class="cart-item-name">' + item.name + '</p><p class="cart-item-price">$' + item.price.toFixed(2) + ' each</p><div class="cart-item-controls"><button class="qty-btn" onclick="changeQty('' + item.id + '',-1)">-</button><span class="qty-num">' + item.qty + '</span><button class="qty-btn" onclick="changeQty('' + item.id + '',1)">+</button><button class="cart-item-remove" onclick="removeItem('' + item.id + '')">Remove</button></div></div>';
+    container.appendChild(el);
+  });
+  bindCursor();
+}
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+function handleCheckout() {
+  showToast('Redirecting to checkout...');
+  setTimeout(closeCart, 1000);
+}
+</script>
+</body>
+</html>
