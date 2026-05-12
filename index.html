@@ -1,61 +1,184 @@
-function renderCart() {
-  const container = document.getElementById('cartItems');
-  const empty = document.getElementById('cartEmpty');
-  const countEl = document.getElementById('cartCount');
-  const subtotalEl = document.getElementById('cartSubtotal');
-  const totalEl = document.getElementById('cartTotal');
-  const btn = document.getElementById('checkoutBtn');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PitchPerfect BD – World Cup 2026 Jerseys</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #00e676; --dark: #080f14; --card-bg: #0d1a22;
+      --gold: #ffd700; --text: #e8f0f7; --muted: #7a9bb5;
+    }
+    body { background: var(--dark); color: var(--text); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+    header { position: relative; text-align: center; padding: 60px 20px 40px; background: linear-gradient(180deg, #001a0a 0%, var(--dark) 100%); overflow: hidden; }
+    header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(0,230,118,0.15) 0%, transparent 70%); pointer-events: none; }
+    .badge { display: inline-block; background: var(--green); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 3px; padding: 4px 14px; border-radius: 2px; margin-bottom: 16px; }
+    header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 12vw, 110px); line-height: 0.9; letter-spacing: 4px; color: #fff; text-shadow: 0 0 60px rgba(0,230,118,0.3); }
+    header h1 span { color: var(--green); }
+    header p.sub { margin-top: 14px; font-size: 16px; color: var(--muted); letter-spacing: 1px; }
+    .ticker-wrap { background: var(--green); overflow: hidden; white-space: nowrap; padding: 10px 0; }
+    .ticker { display: inline-block; animation: ticker 18s linear infinite; font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #000; letter-spacing: 2px; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .section-title { text-align: center; padding: 50px 20px 10px; }
+    .section-title h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 6vw, 56px); letter-spacing: 3px; color: #fff; }
+    .section-title h2 span { color: var(--green); }
+    .section-title p { color: var(--muted); margin-top: 6px; font-size: 15px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 24px; padding: 30px 24px 60px; max-width: 1200px; margin: 0 auto; }
+    .card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,230,118,0.15); border-color: rgba(0,230,118,0.3); }
+    .card-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #fff; display: block; }
+    .card-body { padding: 18px 18px 20px; }
+    .team-flag { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: var(--green); text-transform: uppercase; margin-bottom: 6px; }
+    .card-body h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; color: #fff; line-height: 1; }
+    .card-body .type { color: var(--muted); font-size: 13px; margin-top: 3px; }
+    .price { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--gold); letter-spacing: 1px; margin-top: 14px; }
+    .price span { font-size: 16px; color: var(--muted); }
+    .sizes { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 12px; }
+    .size-tag { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 3px 9px; font-size: 11px; font-weight: 700; color: var(--muted); }
+    .order-btn { display: block; width: 100%; margin-top: 16px; background: var(--green); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; border: none; border-radius: 6px; padding: 12px 0; cursor: pointer; text-decoration: none; text-align: center; transition: background 0.2s, transform 0.15s; }
+    .order-btn:hover { background: #00ff85; transform: scale(1.02); }
+    .ribbon { position: absolute; top: 14px; left: -8px; background: #e53935; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 1px; padding: 4px 14px 4px 12px; clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%); }
+    .contact-strip { background: linear-gradient(135deg, #00230e, #001a0a); border-top: 1px solid rgba(0,230,118,0.2); border-bottom: 1px solid rgba(0,230,118,0.2); padding: 40px 20px; text-align: center; }
+    .contact-strip h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 3px; color: #fff; margin-bottom: 10px; }
+    .contact-strip p { color: var(--muted); margin-bottom: 20px; font-size: 15px; }
+    .phone-link { display: inline-flex; align-items: center; gap: 10px; background: var(--green); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; padding: 14px 36px; border-radius: 8px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .phone-link:hover { background: #00ff85; transform: scale(1.03); }
+    footer { text-align: center; padding: 30px 20px; color: var(--muted); font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); }
+    footer strong { color: var(--green); }
+  </style>
+</head>
+<body>
 
-  const totalItems = cart.reduce((s, i) => s + i.qty, 0);
-  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+<header>
+  <div class="badge">⚽ FIFA WORLD CUP 2026</div>
+  <h1>PITCH<span>PERFECT</span></h1>
+  <p class="sub">Official World Cup 2026 Jerseys · Bangladesh</p>
+</header>
 
-  countEl.textContent = totalItems;
-  countEl.classList.toggle('visible', totalItems > 0);
+<div class="ticker-wrap">
+  <span class="ticker">🏆 World Cup 2026 Jerseys &nbsp;·&nbsp; Fast Delivery &nbsp;·&nbsp; Sizes S to 2XL &nbsp;·&nbsp; Only 1150 Taka &nbsp;·&nbsp; Call +880 17 7666 0007 &nbsp;·&nbsp; 🏆 World Cup 2026 Jerseys &nbsp;·&nbsp; Fast Delivery &nbsp;·&nbsp; Sizes S to 2XL &nbsp;·&nbsp; Only 1150 Taka &nbsp;·&nbsp; Call +880 17 7666 0007 &nbsp;·&nbsp;</span>
+</div>
 
-  subtotalEl.textContent = '$' + subtotal.toFixed(2);
-  totalEl.textContent = '$' + subtotal.toFixed(2);
-  btn.disabled = cart.length === 0;
+<div class="section-title">
+  <h2>SHOP <span>JERSEYS</span></h2>
+  <p>Premium quality · Fast delivery · All sizes available</p>
+</div>
 
-  Array.from(container.children).forEach(c => {
-    if (c.id !== 'cartEmpty') c.remove();
-  });
+<div class="grid">
 
-  if (cart.length === 0) {
-    empty.style.display = 'flex';
-    return;
-  }
-
-  empty.style.display = 'none';
-
-  cart.forEach(item => {
-    const el = document.createElement('div');
-    el.className = 'cart-item';
-
-    el.innerHTML = `
-      <div class="cart-item-img" style="background:${item.bg}">
-        <svg width="50" height="60" viewBox="0 0 320 380" fill="none">
-          <path d="M80 80 L30 120 L50 200 L80 190 L80 330 L240 330 L240 190 L270 200 L290 120 L240 80 L210 60 C210 60 190 100 160 100 C130 100 110 60 110 60 Z" fill="${item.jColor}"/>
-          <path d="M110 60 C110 60 130 100 160 100 C190 100 210 60 210 60 C205 55 195 50 160 50 C125 50 115 55 110 60 Z" fill="#d4a843"/>
-          <text x="160" y="230" text-anchor="middle" font-family="Bebas Neue,sans-serif" font-size="80" fill="white" opacity=".9">${item.num}</text>
-        </svg>
+  <div class="card">
+    <div class="ribbon">NEW</div>
+    <img class="card-img" src="germany-away.jpg" alt="Germany Away Jersey"/>
+    <div class="card-body">
+      <div class="team-flag">🇩🇪 Germany</div>
+      <h3>GERMANY</h3>
+      <div class="type">Away Kit · Adidas Originals</div>
+      <div class="price">1150 <span>BDT</span></div>
+      <div class="sizes">
+        <span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span>
       </div>
+      <a href="tel:+8801776660007" class="order-btn">📞 ORDER NOW</a>
+    </div>
+  </div>
 
-      <div class="cart-item-info">
-        <p class="cart-item-team">${item.team}</p>
-        <p class="cart-item-name">${item.name}</p>
-        <p class="cart-item-price">$${item.price.toFixed(2)} each</p>
-
-        <div class="cart-item-controls">
-          <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
-          <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
-          <button class="cart-item-remove" onclick="removeItem('${item.id}')">Remove</button>
-        </div>
+  <div class="card">
+    <img class="card-img" src="spain-home.jpg" alt="Spain Home Jersey"/>
+    <div class="card-body">
+      <div class="team-flag">🇪🇸 Spain</div>
+      <h3>SPAIN</h3>
+      <div class="type">Home Kit · Adidas</div>
+      <div class="price">1150 <span>BDT</span></div>
+      <div class="sizes">
+        <span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span>
       </div>
-    `;
+      <a href="tel:+8801776660007" class="order-btn">📞 ORDER NOW</a>
+    </div>
+  </div>
 
-    container.appendChild(el);
-  });
+  <div class="card">
+    <div class="ribbon">⭐ CHAMPIONS</div>
+    <img class="card-img" src="argentina-home.jpg" alt="Argentina Home Jersey"/>
+    <div class="card-body">
+      <div class="team-flag">🇦🇷 Argentina</div>
+      <h3>ARGENTINA</h3>
+      <div class="type">Home Kit · Adidas · WC 2022 Champions</div>
+      <div class="price">1150 <span>BDT</span></div>
+      <div class="sizes">
+        <span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span>
+      </div>
+      <a href="tel:+8801776660007" class="order-btn">📞 ORDER NOW</a>
+    </div>
+  </div>
 
-  bindCursor();
-}
+  <div class="card">
+    <img class="card-img" src="brazil-away.jpg" alt="Brazil Away Jersey"/>
+    <div class="card-body">
+      <div class="team-flag">🇧🇷 Brazil</div>
+      <h3>BRAZIL</h3>
+      <div class="type">Away Kit · Jordan Brand</div>
+      <div class="price">1150 <span>BDT</span></div>
+      <div class="sizes">
+        <span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span>
+      </div>
+      <a href="tel:+8801776660007" class="order-btn">📞 ORDER NOW</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card-img" src="spain-away.jpg" alt="Spain Away Jersey"/>
+    <div class="card-body">
+      <div class="team-flag">🇪🇸 Spain</div>
+      <h3>SPAIN</h3>
+      <div class="type">Away Kit · Adidas Originals</div>
+      <div class="price">1150 <span>BDT</span></div>
+      <div class="sizes">
+        <span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span>
+      </div>
+      <a href="tel:+8801776660007" class="order-btn">📞 ORDER NOW</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card-img" src="brazil-home.jpg" alt="Brazil Home Jersey"/>
+    <div class="card-body">
+      <div class="team-flag">🇧🇷 Brazil</div>
+      <h3>BRAZIL</h3>
+      <div class="type">Home Kit · Nike</div>
+      <div class="price">1150 <span>BDT</span></div>
+      <div class="sizes">
+        <span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span>
+      </div>
+      <a href="tel:+8801776660007" class="order-btn">📞 ORDER NOW</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card-img" src="portugal-home.jpg" alt="Portugal Home Jersey"/>
+    <div class="card-body">
+      <div class="team-flag">🇵🇹 Portugal</div>
+      <h3>PORTUGAL</h3>
+      <div class="type">Home Kit · Puma</div>
+      <div class="price">1150 <span>BDT</span></div>
+      <div class="sizes">
+        <span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span>
+      </div>
+      <a href="tel:+8801776660007" class="order-btn">📞 ORDER NOW</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="contact-strip">
+  <h3>READY TO ORDER?</h3>
+  <p>Call or WhatsApp us — we deliver all across Bangladesh</p>
+  <a href="tel:+8801776660007" class="phone-link">📞 +880 17 7666 0007</a>
+</div>
+
+<footer>
+  <strong>PitchPerfect BD</strong> · World Cup 2026 Jerseys · All prices 1150 BDT · Sizes S–2XL
+</footer>
+
+</body>
+</html>
