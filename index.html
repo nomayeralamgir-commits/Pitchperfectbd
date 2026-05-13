@@ -10,7 +10,7 @@
     :root {
       --green: #00e676; --dark: #080f14; --card-bg: #0d1a22;
       --gold: #ffd700; --text: #e8f0f7; --muted: #7a9bb5;
-      --wa: #25D366;
+      --wa: #25D366; --red: #ff3d3d;
     }
     body { background: var(--dark); color: var(--text); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
     header { position: relative; text-align: center; padding: 60px 20px 40px; background: linear-gradient(180deg, #001a0a 0%, var(--dark) 100%); overflow: hidden; }
@@ -19,14 +19,18 @@
     header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 12vw, 110px); line-height: 0.9; letter-spacing: 4px; color: #fff; text-shadow: 0 0 60px rgba(0,230,118,0.3); }
     header h1 span { color: var(--green); }
     header p.sub { margin-top: 14px; font-size: 16px; color: var(--muted); letter-spacing: 1px; }
+
     .ticker-wrap { background: var(--green); overflow: hidden; white-space: nowrap; padding: 10px 0; }
     .ticker { display: inline-block; animation: ticker 20s linear infinite; font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #000; letter-spacing: 2px; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
     .section-title { text-align: center; padding: 50px 20px 10px; }
     .section-title h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 6vw, 56px); letter-spacing: 3px; color: #fff; }
     .section-title h2 span { color: var(--green); }
     .section-title p { color: var(--muted); margin-top: 6px; font-size: 15px; }
+
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; padding: 30px 24px 60px; max-width: 1300px; margin: 0 auto; }
+
     .card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s, box-shadow 0.3s; position: relative; }
     .card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,230,118,0.15); border-color: rgba(0,230,118,0.3); }
     .card-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #fff; display: block; }
@@ -34,16 +38,25 @@
     .team-flag { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: var(--green); text-transform: uppercase; margin-bottom: 5px; }
     .card-body h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; line-height: 1; }
     .card-body .type { color: var(--muted); font-size: 12px; margin-top: 3px; }
-    .price { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--gold); letter-spacing: 1px; margin-top: 12px; }
-    .price span { font-size: 15px; color: var(--muted); }
+
+    /* PRICE SECTION */
+    .price-row { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    .old-price { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--muted); text-decoration: line-through; letter-spacing: 1px; }
+    .new-price { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--red); letter-spacing: 1px; }
+    .new-price span { font-size: 15px; color: var(--muted); }
+    .discount-badge { background: var(--red); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; }
+
     .sizes { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
     .size-tag { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 3px 8px; font-size: 11px; font-weight: 700; color: var(--muted); }
+
     .btn-row { display: flex; gap: 8px; margin-top: 14px; }
-    .wa-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--wa); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1.5px; border: none; border-radius: 6px; padding: 11px 0; cursor: pointer; text-decoration: none; text-align: center; transition: background 0.2s, transform 0.15s; }
+    .wa-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--wa); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1.5px; border: none; border-radius: 6px; padding: 11px 0; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .wa-btn:hover { background: #1fba58; transform: scale(1.02); }
     .wa-icon { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+
     .ribbon { position: absolute; top: 14px; left: -8px; background: #e53935; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 1px; padding: 4px 12px 4px 10px; clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%); z-index: 2; }
     .ribbon.gold { background: #b8860b; }
+
     .contact-strip { background: linear-gradient(135deg, #00230e, #001a0a); border-top: 1px solid rgba(0,230,118,0.2); border-bottom: 1px solid rgba(0,230,118,0.2); padding: 40px 20px; text-align: center; }
     .contact-strip h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 3px; color: #fff; margin-bottom: 10px; }
     .contact-strip p { color: var(--muted); margin-bottom: 20px; font-size: 15px; }
@@ -52,6 +65,7 @@
     .big-wa-btn:hover { background: #1fba58; transform: scale(1.03); }
     .big-call-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--green); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; padding: 14px 36px; border-radius: 8px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .big-call-btn:hover { background: #00ff85; transform: scale(1.03); }
+
     footer { text-align: center; padding: 30px 20px; color: var(--muted); font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); }
     footer strong { color: var(--green); }
   </style>
@@ -65,15 +79,14 @@
 </header>
 
 <div class="ticker-wrap">
-  <span class="ticker">🏆 World Cup 2026 Jerseys &nbsp;·&nbsp; Fast Delivery &nbsp;·&nbsp; Sizes S to 2XL &nbsp;·&nbsp; Only 1150 Taka &nbsp;·&nbsp; WhatsApp +880 17 7666 0007 &nbsp;·&nbsp; Germany · Spain · Argentina · Brazil · Portugal · England · Belgium · Japan · USA · Croatia · France · Netherlands · Saudi Arabia &nbsp;·&nbsp; 🏆 World Cup 2026 Jerseys &nbsp;·&nbsp; Fast Delivery &nbsp;·&nbsp; Sizes S to 2XL &nbsp;·&nbsp; Only 1150 Taka &nbsp;·&nbsp; WhatsApp +880 17 7666 0007 &nbsp;·&nbsp;</span>
+  <span class="ticker">🔥 LIMITED SALE — 12% OFF! &nbsp;·&nbsp; Was 1250 Taka Now Only 1100 Taka &nbsp;·&nbsp; Sizes S to 2XL &nbsp;·&nbsp; WhatsApp +880 17 7666 0007 &nbsp;·&nbsp; Germany · Spain · Argentina · Brazil · Portugal · England · Belgium · Japan · USA · Croatia · France · Netherlands · Saudi Arabia &nbsp;·&nbsp; 🔥 LIMITED SALE — 12% OFF! &nbsp;·&nbsp; Was 1250 Taka Now Only 1100 Taka &nbsp;·&nbsp; Sizes S to 2XL &nbsp;·&nbsp; WhatsApp +880 17 7666 0007 &nbsp;·&nbsp;</span>
 </div>
 
 <div class="section-title">
   <h2>SHOP <span>JERSEYS</span></h2>
-  <p>Premium quality · Fast delivery · All sizes available · 20 kits in stock</p>
+  <p>🔥 Limited time sale — 12% off all jerseys!</p>
 </div>
 
-<!-- WhatsApp SVG icon template (reused via inline) -->
 <svg style="display:none">
   <symbol id="wa" viewBox="0 0 24 24">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -84,61 +97,80 @@
 
   <!-- 1. Germany Away -->
   <div class="card">
-    <div class="ribbon">NEW</div>
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="germany-away.jpg" alt="Germany Away"/>
     <div class="card-body">
       <div class="team-flag">🇩🇪 Germany</div>
       <h3>GERMANY</h3>
       <div class="type">Away Kit · Adidas Originals</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Germany%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Germany%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 2. Germany Home -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="germany-home.jpg" alt="Germany Home"/>
     <div class="card-body">
       <div class="team-flag">🇩🇪 Germany</div>
       <h3>GERMANY</h3>
       <div class="type">Home Kit · Adidas</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Germany%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Germany%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 3. Spain Home -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="spain-home.jpg" alt="Spain Home"/>
     <div class="card-body">
       <div class="team-flag">🇪🇸 Spain</div>
       <h3>SPAIN</h3>
       <div class="type">Home Kit · Adidas</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Spain%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Spain%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 4. Spain Away -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="spain-away.jpg" alt="Spain Away"/>
     <div class="card-body">
       <div class="team-flag">🇪🇸 Spain</div>
       <h3>SPAIN</h3>
       <div class="type">Away Kit · Adidas Originals</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Spain%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Spain%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
@@ -151,240 +183,314 @@
       <div class="team-flag">🇦🇷 Argentina</div>
       <h3>ARGENTINA</h3>
       <div class="type">Home Kit · Adidas · WC 2022 Champions</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Argentina%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Argentina%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 6. Argentina Away -->
   <div class="card">
-    <div class="ribbon">NEW</div>
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="argentina-away.jpg" alt="Argentina Away"/>
     <div class="card-body">
       <div class="team-flag">🇦🇷 Argentina</div>
       <h3>ARGENTINA</h3>
       <div class="type">Away Kit · Adidas Originals</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Argentina%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Argentina%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 7. Brazil Home -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="brazil-home.jpg" alt="Brazil Home"/>
     <div class="card-body">
       <div class="team-flag">🇧🇷 Brazil</div>
       <h3>BRAZIL</h3>
       <div class="type">Home Kit · Nike</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Brazil%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Brazil%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 8. Brazil Away -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="brazil-away.jpg" alt="Brazil Away"/>
     <div class="card-body">
       <div class="team-flag">🇧🇷 Brazil</div>
       <h3>BRAZIL</h3>
       <div class="type">Away Kit · Jordan Brand</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Brazil%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Brazil%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 9. Portugal Home -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="portugal-home.jpg" alt="Portugal Home"/>
     <div class="card-body">
       <div class="team-flag">🇵🇹 Portugal</div>
       <h3>PORTUGAL</h3>
       <div class="type">Home Kit · Puma</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Portugal%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Portugal%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 10. Portugal Away -->
   <div class="card">
-    <div class="ribbon">NEW</div>
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="portugal-away.jpg" alt="Portugal Away"/>
     <div class="card-body">
       <div class="team-flag">🇵🇹 Portugal</div>
       <h3>PORTUGAL</h3>
       <div class="type">Away Kit · Puma</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Portugal%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Portugal%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 11. England Home -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="england-home.jpg" alt="England Home"/>
     <div class="card-body">
       <div class="team-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</div>
       <h3>ENGLAND</h3>
       <div class="type">Home Kit · Nike</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20England%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20England%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 12. England Away -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="england-away.jpg" alt="England Away"/>
     <div class="card-body">
       <div class="team-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</div>
       <h3>ENGLAND</h3>
       <div class="type">Away Kit · Nike</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20England%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20England%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 13. Belgium Home -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="belgium-home.jpg" alt="Belgium Home"/>
     <div class="card-body">
       <div class="team-flag">🇧🇪 Belgium</div>
       <h3>BELGIUM</h3>
       <div class="type">Home Kit · Adidas</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Belgium%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Belgium%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 14. Japan Away -->
   <div class="card">
-    <div class="ribbon">NEW</div>
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="japan-away.jpg" alt="Japan Away"/>
     <div class="card-body">
       <div class="team-flag">🇯🇵 Japan</div>
       <h3>JAPAN</h3>
       <div class="type">Away Kit · Adidas Originals</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Japan%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Japan%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 15. USA Away -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="usa-away.jpg" alt="USA Away"/>
     <div class="card-body">
       <div class="team-flag">🇺🇸 USA</div>
       <h3>USA</h3>
       <div class="type">Away Kit · Nike · Host Nation</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20USA%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20USA%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 16. Croatia Home -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="croatia-home.jpg" alt="Croatia Home"/>
     <div class="card-body">
       <div class="team-flag">🇭🇷 Croatia</div>
       <h3>CROATIA</h3>
       <div class="type">Home Kit · Nike</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Croatia%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Croatia%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 17. France Home -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="france-home.jpg" alt="France Home"/>
     <div class="card-body">
       <div class="team-flag">🇫🇷 France</div>
       <h3>FRANCE</h3>
       <div class="type">Home Kit · Nike</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20France%20Home%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20France%20Home%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 18. France Away -->
   <div class="card">
-    <div class="ribbon">NEW</div>
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="france-away.jpg" alt="France Away"/>
     <div class="card-body">
       <div class="team-flag">🇫🇷 France</div>
       <h3>FRANCE</h3>
       <div class="type">Away Kit · Nike</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20France%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20France%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 19. Netherlands Away -->
   <div class="card">
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="netherlands-away.jpg" alt="Netherlands Away"/>
     <div class="card-body">
       <div class="team-flag">🇳🇱 Netherlands</div>
       <h3>NETHERLANDS</h3>
       <div class="type">Away Kit · Nike</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Netherlands%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Netherlands%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
 
   <!-- 20. Saudi Arabia Away -->
   <div class="card">
-    <div class="ribbon">NEW</div>
+    <div class="ribbon">12% OFF</div>
     <img class="card-img" src="saudi-away.jpg" alt="Saudi Arabia Away"/>
     <div class="card-body">
       <div class="team-flag">🇸🇦 Saudi Arabia</div>
       <h3>SAUDI ARABIA</h3>
       <div class="type">Away Kit · Adidas</div>
-      <div class="price">1150 <span>BDT</span></div>
+      <div class="price-row">
+        <span class="old-price">1250 ৳</span>
+        <span class="new-price">1100 <span>BDT</span></span>
+        <span class="discount-badge">12% OFF</span>
+      </div>
       <div class="sizes"><span class="size-tag">S</span><span class="size-tag">M</span><span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">2XL</span></div>
       <div class="btn-row">
-        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Saudi%20Arabia%20Away%20Jersey%20-%201150%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
+        <a href="https://wa.me/8801776660007?text=Hi%2C%20I%20want%20to%20order%20Saudi%20Arabia%20Away%20Jersey%20-%201100%20BDT" class="wa-btn" target="_blank"><svg class="wa-icon"><use href="#wa"/></svg> WHATSAPP</a>
       </div>
     </div>
   </div>
@@ -404,7 +510,7 @@
 </div>
 
 <footer>
-  <strong>PitchPerfect BD</strong> · World Cup 2026 Jerseys · All prices 1150 BDT · Sizes S–2XL · 20 Kits Available
+  <strong>PitchPerfect BD</strong> · World Cup 2026 Jerseys · Sale Price 1100 BDT (Was 1250) · 12% OFF · Sizes S–2XL
 </footer>
 
 </body>
